@@ -297,7 +297,10 @@
 			this.settings.width_skitter 	= parseFloat(this.box_skitter.css('width'));
 			this.settings.height_skitter 	= parseFloat(this.box_skitter.css('height'));
 
-            this.skitter_toolbar.height(this.settings.height_skitter+50);
+            if(this.settings.toolbarContent)
+            {
+                this.skitter_toolbar.height(this.settings.height_skitter+50);
+            }
 
 
 			if (!this.settings.width_skitter || !this.settings.height_skitter) {
