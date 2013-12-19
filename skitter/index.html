@@ -7,55 +7,132 @@
 
     <link href="css/styles.css" type="text/css" media="all" rel="stylesheet"/>
 
+
+    <link href="external/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+
     <!-- Skitter Styles -->
     <link href="css/skitter.styles.css" type="text/css" media="all" rel="stylesheet"/>
 
     <!-- Skitter JS -->
-    <script type="text/javascript" language="javascript" src="js/jquery-1.6.3.min.js"></script>
+    <!--<script type="text/javascript" language="javascript" src="js/jquery-1.6.3.min.js"></script>-->
+
+    <script type="text/javascript" language="JavaScript" src="js/jquery.min.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery.easing.1.3.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery.animate-colors-min.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery.skitter.js"></script>
 
+
+    <!--<script type="text/javascript" language="javascript" src="external/bootstrap3.min.js"></script>-->
+    <script type="text/javascript" language="javascript" src="external/bootstrap3.min.js"></script>
+
     <!-- Init Skitter -->
     <script type="text/javascript" language="javascript">
-        $(document).ready(function () {
-            $('.box_skitter').skitter({
-                thumbs: true,
-                resizeevennotfullscreen: true,
-                height_skitter: 400,
-                width_skitter: 500,
-                stretchimage: true
+        function show_image_slideshow()
+        {
+            $('#imageslider-modal').remove();
+            $("body").append(' <div  id="imageslider-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true"></div>');
+            var $modal = $('#imageslider-modal');
+            $modal.load("image_slider.html", function(){
+                $modal.modal({width:'700px'}).on('hidden', function(){
+                    $modal.remove();
+                });
+
             });
-        });
+        }
     </script>
 </head>
 <body>
-<div id="page">
-    <h1>Skitter - Slideshow for anytime!</h1>
 
-    <div id="content">
-        <div class="border_box">
-            <div class="box_skitter">
-                <ul>
-                    <li><a href="#cube"><img src="images/example/001.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/002.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/003.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/004.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/005.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/006.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/007.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/008.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/009.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/010.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/011.jpg" class="cube"/></a></li>
-                    <li><a href="#cube"><img src="images/example/012.jpg" class="cube"/></a></li>
-                </ul>
+<span class="btn btn-small btn-primary" onclick="show_image_slideshow()">View Image</span>
+
+<div class="special-stuff" style="display: none">
+    <div class="gitems">
+
+
+        <div class="gitem" data-keyword="" data-pid="16769" data-aid="44257">
+            <div class="toprow"><input id="gal2152" type="checkbox"></div>
+            <div class="gresource" title="line4 dns.png" href="images/example/001.jpg" ecab-id="2152">
+            </div>
+            <div class="ginfo" title="2013-12-16_110435_1.png">2013-12-16_110435_1.png</div>
+        </div>
+
+        <div class="gitem" data-keyword="" data-pid="16769" data-aid="44258">
+            <div class="toprow"><input id="gal2151" type="checkbox"></div>
+            <div class="gresource" title="line4 dns.png" href="images/example/002.jpg" ecab-id="2151">
+            </div>
+            <div class="ginfo" title="2013-12-16_105854_1.png">2013-12-16_105854_1.png</div>
+        </div>
+
+        <div class="gitem" data-keyword="" data-pid="20142" data-aid="42707">
+            <div class="toprow"><input id="gal2150" type="checkbox"></div>
+            <div class="gresource" title="line4 dns.png" href="images/example/003.jpg" ecab-id="2150">
+            </div>
+            <div class="ginfo" title="2013-12-16_105702_1.png">2013-12-16_105702_1.png</div>
+        </div>
+
+        <div class="gitem" data-keyword="" data-pid="20142" data-aid="42707">
+            <div class="toprow"><input id="gal2149" type="checkbox"></div>
+            <div class="gresource" title="line4 dns.png" href="images/example/004.jpg" ecab-id="2149">
+            </div>
+            <div class="ginfo" title="2013-12-16_105618_1.png">2013-12-16_105618_1.png</div>
+        </div>
+
+        <div class="gitem" data-keyword="" data-pid="15669" data-aid="33877">
+            <div class="toprow"><input id="gal2148" type="checkbox"></div>
+            <div class="gresource" title="Tulips.jpg" href="images/example/005.jpg" ecab-id="2148">
+            </div>
+            <div class="ginfo" title="LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_8.jpg">
+                LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_8.jpg
             </div>
         </div>
-    </div>
-    <h2>Enjoy! =D</h2>
 
-    <h3><a href="http://www.skitter-slider.net">See documentation</a></h3>
+        <div class="gitem" data-keyword="" data-pid="15669" data-aid="33877">
+            <div class="toprow"><input id="gal2147" type="checkbox"></div>
+            <div class="gresource" title="Penguins.jpg" href="images/example/006.jpg" ecab-id="2147">
+            </div>
+            <div class="ginfo" title="LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_7.jpg">
+                LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_7.jpg
+            </div>
+        </div>
+
+        <div class="gitem" data-keyword="" data-pid="15669" data-aid="33877">
+            <div class="toprow"><input id="gal2146" type="checkbox"></div>
+            <div class="gresource" title="Lighthouse.jpg" href="images/example/007.jpg" ecab-id="2146">
+            </div>
+            <div class="ginfo" title="LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_6.jpg">
+                LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_6.jpg
+            </div>
+        </div>
+
+        <div class="gitem" data-keyword="" data-pid="15669" data-aid="33877">
+            <div class="toprow"><input id="gal2145" type="checkbox"></div>
+            <div class="gresource" title="Koala.jpg" href="images/example/008.jpg" ecab-id="2145">
+            </div>
+            <div class="ginfo" title="LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_5.jpg">
+                LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_5.jpg
+            </div>
+        </div>
+
+        <div class="gitem" data-keyword="" data-pid="15669" data-aid="33877">
+            <div class="toprow"><input id="gal2144" type="checkbox"></div>
+            <div class="gresource" title="Chrysanthemum.jpg" href="images/example/009.jpg" ecab-id="2144">
+            </div>
+            <div class="ginfo" title="LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_4.jpg">
+                LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_4.jpg
+            </div>
+        </div>
+
+        <div class="gitem" data-keyword="" data-pid="15669" data-aid="33877">
+            <div class="toprow"><input id="gal2143" type="checkbox"></div>
+            <div class="gresource" title="Jellyfish.jpg" href="images/example/010.jpg" ecab-id="2143">
+            </div>
+            <div class="ginfo" title="LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_3.jpg">
+                LeeK_1978-05-05_0042B7_MRUpdateSys_2012-05-09_115925_3.jpg
+            </div>
+        </div>
+
+
+    </div>
 </div>
 </body>
 </html>

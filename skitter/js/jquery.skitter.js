@@ -9,6 +9,7 @@
  * @copyright (c) 2010 Thiago Silva Ferreira - http://thiagosf.net
  * @license Dual licensed under the MIT or GPL Version 2 licenses
  * @example http://thiagosf.net/projects/jquery/skitter/
+ * @modifiedby Ivan Li
  */
 ;(function($) {
 	
@@ -112,6 +113,8 @@
 
         stretchimage:           false,
 
+        mainContainer:          null,
+
 		// Loading data from XML file
 		xml: 					false,
 
@@ -129,6 +132,9 @@
 
 		// Interval animation out elements hideTools
 		interval_out_elements:	300, 
+
+        // Before Load Callback
+        beforeLoad:             null,
 
 		// Onload Callback
 		onLoad:					null,
@@ -205,7 +211,15 @@
 		labelAnimation: 		'slideUp', 
 
 		// Theme
-		theme: null, 
+		theme: null,
+
+        image_data_array:       null,
+
+        skitter_toolbar:        null,
+
+        toolbarContent:         null,
+
+        toolbarStructure: '<div class="skitter-toolbar"></div>',
 
 		// Structure (internal)
 		structure: 	 			  '<a href="#" class="prev_button">prev</a>'
@@ -221,7 +235,12 @@
 	};
 	
 	$.skitter = function(obj, options, number) {
-		this.box_skitter = $(obj);
+
+        /*put container outside box_skitter*/
+        this.mainContainer = $(obj);
+        this.box_skitter = this.mainContainer.find('.box_skitter');
+        this.box_skitter.css({'display': 'inline-block'});
+
 		this.timer = null;
 		this.settings = $.extend({}, defaults, options || {});
 		this.number_skitter = number;
@@ -243,6 +262,16 @@
 		setup: function() 
 		{
 			var self = this;
+
+            self.beforeLoadImage();
+
+            console.log(this.settings.toolbarStructure);
+            console.log(this.settings.toolbarContent);
+            if(this.settings.toolbarContent){
+                this.mainContainer.prepend(this.settings.toolbarStructure);
+                this.skitter_toolbar = this.mainContainer.find('.skitter-toolbar');
+                this.skitter_toolbar.append(this.settings.toolbarContent);
+            }
 
             /*change skitter size*/
             if(self.settings.height_skitter)
@@ -267,7 +296,10 @@
 			
 			this.settings.width_skitter 	= parseFloat(this.box_skitter.css('width'));
 			this.settings.height_skitter 	= parseFloat(this.box_skitter.css('height'));
-			
+
+            this.skitter_toolbar.height(this.settings.height_skitter+50);
+
+
 			if (!this.settings.width_skitter || !this.settings.height_skitter) {
 				console.warn('Width or height size is null! - Skitter Slideshow');
 				return false;
@@ -351,6 +383,23 @@
 			else if (this.settings.json) {
 				
 			}
+            /*
+            * special condition,
+            * load from Array,
+            * Special defined for eclinic
+            */
+            else if (this.settings.image_data_array) {
+                ++u;
+                $.each(this.settings.image_data_array, function(i, v){
+                    var link = '#cube';
+                    var src = v['href'];
+                    var animation_type = 'cube';
+                    var label = '';
+//                    var label = v['filename'];
+                    var target = '_self';
+                    addImageLink(link, src, animation_type, label, target);
+                });
+            }
 			// Load from HTML
 			else {
 				this.box_skitter.find('ul li').each(function(){
@@ -360,6 +409,11 @@
 					var animation_type 	= $(this).find('img').attr('class');
 					var label 			= $(this).find('.label_text').html();
 					var target 			= ($(this).find('a').length && $(this).find('a').attr('target')) ? $(this).find('a').attr('target') : '_self';
+                    console.log('link: '+link);
+                    console.log('src: '+src);
+                    console.log('animation type: '+animation_type);
+                    console.log('label: '+label);
+                    console.log('target: '+target);
 					addImageLink(link, src, animation_type, label, target);
 				});
 			}
@@ -613,7 +667,16 @@
 			
 			this.loadImages();
 		},
-		
+
+        /**
+        * Before Load
+        */
+		beforeLoadImage: function()
+        {
+            if($.isFunction(this.settings.beforeLoad)) this.settings.beforeLoad();
+        },
+
+
 		/**
 		 * Load images
 		 */
@@ -2625,6 +2688,10 @@
                 if(this.settings.stretchimage){
                     img_clone.find('img').attr('height', this.settings.height_skitter);
                     img_clone.find('img').attr('width', this.settings.width_skitter);
+                    img_clone.find('img').css({
+                        'width':this.settings.width_skitter,
+                        'height':this.settings.height_skitter
+                    });
                 }
                 else{
                     img_clone.find('img').height(this.settings.height_skitter);
