@@ -1,6 +1,6 @@
 <style type="text/css">
     #imageslider-modal.modal {
-        width: 700px;
+        width: 655px;
         background-color: rgba(0,0,0,0);
         border: none;
         box-shadow: none;
@@ -23,11 +23,11 @@
     }
 </style>
 
-<div class="modal-body" style="padding: 25px 0 0 0;">
+<div class="modal-body" style="padding: 25px 0 0 0; text-align: center">
     <i onclick="$(this).closest('.modal').modal('hide'); " class="icon-remove closemodal">x</i>
 
-    <div class="slideshow-container" style="border-top-left-radius: 10px 5px;">
-        <div class="box_skitter">
+    <div class="slideshow-container">
+        <div class="box_skitter skitter-round">
         </div>
     </div>
 </div>
@@ -46,13 +46,13 @@
                     $(ul).append("<li><a href='#cube'><img src='" + $(v).attr('href') + "' class='cube'></a></li>");
                 });
                 $(".box_skitter").append(ul);
-            },
-            toolbarContent: "<div class='btn-group btn-group-vertical'>" +
-                    "<span class='btn btn-small' style='margin-top: 10px'>Authorise</span>" +
-                    "<span class='btn btn-small' style='margin-top: 10px'>Edit</span>" +
-                    "<span class='btn btn-small' style='margin-top: 10px'>Download</span>" +
-                    "<span class='btn btn-small' style='margin-top: 10px'>Print</span>" +
-                    "</div>"
+            }
+//            toolbarContent: "<div class='btn-group btn-group-vertical'>" +
+//                    "<span class='btn btn-small' style='margin-top: 10px'>Authorise</span>" +
+//                    "<span class='btn btn-small' style='margin-top: 10px'>Edit</span>" +
+//                    "<span class='btn btn-small' style='margin-top: 10px'>Download</span>" +
+//                    "<span class='btn btn-small' style='margin-top: 10px'>Print</span>" +
+//                    "</div>"
         });
     });
 </script>
