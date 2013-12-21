@@ -118,6 +118,9 @@
 		// Loading data from XML file
 		xml: 					false,
 
+        // Loading data from json object
+        json:                   null,
+
 		// Navigation with dots
 		dots: 					false,
 
@@ -215,11 +218,17 @@
 
         image_data_array:       null,
 
-        skitter_toolbar:        null,
+        skitter_toolbar_left:   null,
 
-        toolbarContent:         null,
+        skitter_toolbar_right:  null,
 
-        toolbarStructure: '<div class="skitter-toolbar"></div>',
+        toolbarContentLeft:     null,
+
+        toolbarContentRight:    null,
+
+        toolbarStructureLeft: '<div class="skitter-toolbar-left"></div>',
+
+        toolbarStructureRight:'<div class="skitter-toolbar-right"></div>',
 
 		// Structure (internal)
 		structure: 	 			  '<a href="#" class="prev_button">prev</a>'
@@ -265,12 +274,15 @@
 
             self.beforeLoadImage();
 
-            console.log(this.settings.toolbarStructure);
-            console.log(this.settings.toolbarContent);
-            if(this.settings.toolbarContent){
-                this.mainContainer.prepend(this.settings.toolbarStructure);
-                this.skitter_toolbar = this.mainContainer.find('.skitter-toolbar');
-                this.skitter_toolbar.append(this.settings.toolbarContent);
+            if(this.settings.toolbarContentLeft){
+                this.box_skitter.prepend(this.settings.toolbarStructureLeft);
+                this.skitter_toolbar_left = this.box_skitter.find('.skitter-toolbar-left');
+                this.skitter_toolbar_left.append(this.settings.toolbarContentLeft);
+            }
+            if(this.settings.toolbarContentRight){
+                this.box_skitter.prepend(this.settings.toolbarStructureRight);
+                this.skitter_toolbar_right = this.box_skitter.find('.skitter-toolbar-right');
+                this.skitter_toolbar_right.append(this.settings.toolbarContentRight);
             }
 
             /*change skitter size*/
@@ -297,9 +309,14 @@
 			this.settings.width_skitter 	= parseFloat(this.box_skitter.css('width'));
 			this.settings.height_skitter 	= parseFloat(this.box_skitter.css('height'));
 
-            if(this.settings.toolbarContent)
+            if(this.settings.toolbarContentLeft)
             {
-                this.skitter_toolbar.height(this.settings.height_skitter+50);
+                this.skitter_toolbar_left.height(this.settings.height_skitter);
+            }
+
+            if(this.settings.toolbarContentRight)
+            {
+                this.skitter_toolbar_right.height(this.settings.height_skitter);
             }
 
 
@@ -384,25 +401,25 @@
 			}
 			// Load from json
 			else if (this.settings.json) {
-				
-			}
-            /*
-            * special condition,
-            * load from Array,
-            * Special defined for eclinic
-            */
-            else if (this.settings.image_data_array) {
-                ++u;
-                $.each(this.settings.image_data_array, function(i, v){
-                    var link = '#cube';
-                    var src = v['href'];
-                    var animation_type = 'cube';
-                    var label = '';
-//                    var label = v['filename'];
-                    var target = '_self';
+				/**
+                 * data structure:
+                 * link
+                 * src
+                 * animation_type
+                 * label
+                 * target
+                 */
+                $.each(this.settings.json, function(i, v){
+                    ++u;
+                    var link = v['link'];
+                    var src = v['src'];
+                    var animation_type = v['animation_type'];
+                    var label = v['label'];
+                    var target = v['target'];
                     addImageLink(link, src, animation_type, label, target);
                 });
-            }
+
+			}
 			// Load from HTML
 			else {
 				this.box_skitter.find('ul li').each(function(){
@@ -412,11 +429,6 @@
 					var animation_type 	= $(this).find('img').attr('class');
 					var label 			= $(this).find('.label_text').html();
 					var target 			= ($(this).find('a').length && $(this).find('a').attr('target')) ? $(this).find('a').attr('target') : '_self';
-                    console.log('link: '+link);
-                    console.log('src: '+src);
-                    console.log('animation type: '+animation_type);
-                    console.log('label: '+label);
-                    console.log('target: '+target);
 					addImageLink(link, src, animation_type, label, target);
 				});
 			}
@@ -870,7 +882,7 @@
 				++this.settings._i_animation;
 				if (this.settings._i_animation >= total_with_animations) this.settings._i_animation = 0;
 			}
-			
+			console.log(animation_type)
 			switch (animation_type) 
 			{
 				case 'cube' : 
@@ -2652,12 +2664,16 @@
 			if (this.settings.link_atual != '#') {
 				var img_clone = $('<a href="'+this.settings.link_atual+'"><img src="'+this.settings.image_atual+'" /></a>');
 				img_clone.attr({ 'target': this.settings.target_atual });
-			} 
+			}
 			else {
 				var img_clone = $('<img src="'+this.settings.image_atual+'" />');
 			}
-			
 			img_clone = this.resizeImage(img_clone);
+
+            /*testing*/
+//            img_clone.width(600).height(400);
+            /*end of testing*/
+
 			var box_clone = $('<div class="box_clone"></div>');
 			box_clone.append(img_clone);
 			return box_clone;
@@ -2689,19 +2705,21 @@
             if (this.settings.resizeevennotfullscreen)
             {
                 if(this.settings.stretchimage){
-                    img_clone.find('img').attr('height', this.settings.height_skitter);
+
+                    var img = img_clone.find('img');
+                    img.attr('height', this.settings.height_skitter);
                     img_clone.find('img').attr('width', this.settings.width_skitter);
                     img_clone.find('img').css({
                         'width':this.settings.width_skitter,
                         'height':this.settings.height_skitter
                     });
+                    img_clone.width(this.settings.width_skitter);
+                    img_clone.height(this.settings.height_skitter);
                 }
-                else{
-                    img_clone.find('img').height(this.settings.height_skitter);
-                }
+
             }
 			return img_clone;
-		}, 
+		},
 
 		// Add box clone in box_skitter
 		addBoxClone: function(box_clone)

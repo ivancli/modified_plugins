@@ -1,7 +1,7 @@
 <style type="text/css">
     #imageslider-modal.modal {
-        width: 655px;
-        background-color: rgba(0,0,0,0);
+        width: 680px;
+        background-color: rgba(0, 0, 0, 0);
         border: none;
         box-shadow: none;
     }
@@ -34,25 +34,34 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        var media_data = new Array();
+        $.each($(".gitems .gresource"), function (i, v) {
+            var jsonData = {};
+            jsonData['link'] = '#';
+            jsonData['src'] = $(v).attr('href');
+            jsonData['animation_type'] = 'circlesRotate';
+            jsonData['label'] = $(v).parent().find('.ginfo').html();
+            jsonData['target'] = '_self';
+            media_data.push(jsonData);
+        });
+        console.log(media_data);
         $('.slideshow-container').skitter({
+            animation: 'random',
             thumbs: true,
             resizeevennotfullscreen: true,
             height_skitter: 400,
             width_skitter: 600,
             stretchimage: true,
-            beforeLoad: function () {
-                var ul = document.createElement('UL');
-                $.each($(".gitems .gresource"), function (i, v) {
-                    $(ul).append("<li><a href='#cube'><img src='" + $(v).attr('href') + "' class='cube'></a></li>");
-                });
-                $(".box_skitter").append(ul);
-            }
-//            toolbarContent: "<div class='btn-group btn-group-vertical'>" +
-//                    "<span class='btn btn-small' style='margin-top: 10px'>Authorise</span>" +
-//                    "<span class='btn btn-small' style='margin-top: 10px'>Edit</span>" +
-//                    "<span class='btn btn-small' style='margin-top: 10px'>Download</span>" +
-//                    "<span class='btn btn-small' style='margin-top: 10px'>Print</span>" +
-//                    "</div>"
+            json: media_data,
+//            beforeLoad: function () {
+//                var ul = document.createElement('UL');
+//                $.each($(".gitems .gresource"), function (i, v) {
+//                    $(ul).append("<li><a href='#cube'><img src='" + $(v).attr('href') + "' class='cube'></a></li>");
+//                });
+//                $(".box_skitter").append(ul);
+//            },
+            toolbarContentLeft: 'asdf',
+            toolbarContentRight: 'klsjdf'
         });
     });
 </script>
