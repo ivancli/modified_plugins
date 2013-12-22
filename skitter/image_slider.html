@@ -36,15 +36,35 @@
     $(document).ready(function () {
         var media_data = new Array();
         $.each($(".gitems .gresource"), function (i, v) {
-            var jsonData = {};
-            jsonData['link'] = '#';
-            jsonData['src'] = $(v).attr('href');
-            jsonData['animation_type'] = 'circlesRotate';
-            jsonData['label'] = $(v).parent().find('.ginfo').html();
-            jsonData['target'] = '_self';
-            media_data.push(jsonData);
+            var arrayData = {};
+            arrayData['link'] = '#';
+            arrayData['src'] = $(v).attr('href');
+            arrayData['animation_type'] = 'circlesRotate';
+            arrayData['label'] = $(v).parent().find('.ginfo').html();
+            arrayData['target'] = '_self';
+//            if($(v).attr('href').slice(-4, -1))
+            console.log($(v).attr('href').substr($(v).attr('href').indexOf('.')));
+            switch ($(v).attr('href').substr($(v).attr('href').indexOf('.'))) {
+                case '.jpg':
+                case '.jpeg':
+                case '.png':
+                case '.gif':
+                case '.bmp':
+                    arrayData['mediatype'] = 'image';
+                    break;
+                case '.mp4':
+                case '.mp3':
+                case '.aac':
+                case '.oog':
+                case '.webm':
+                    arrayData['mediatype'] = 'multi';
+                    break;
+                default :
+                    console.log('HTML5 doesn\'t support ' + $(v).attr('href').substr($(v).attr('href').indexOf('.')) + ' file');
+                    break;
+            }
+            media_data.push(arrayData);
         });
-        console.log(media_data);
         $('.slideshow-container').skitter({
             animation: 'random',
             thumbs: true,
@@ -53,15 +73,9 @@
             width_skitter: 600,
             stretchimage: true,
             json: media_data,
-//            beforeLoad: function () {
-//                var ul = document.createElement('UL');
-//                $.each($(".gitems .gresource"), function (i, v) {
-//                    $(ul).append("<li><a href='#cube'><img src='" + $(v).attr('href') + "' class='cube'></a></li>");
-//                });
-//                $(".box_skitter").append(ul);
-//            },
             toolbarContentLeft: 'asdf',
-            toolbarContentRight: 'klsjdf'
+            toolbarContentRight: 'klsjdf',
+            multimedia_detection: true
         });
     });
 </script>
