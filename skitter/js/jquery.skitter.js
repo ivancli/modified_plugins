@@ -248,7 +248,7 @@
             + '<div class="label_skitter"></div>'
             + '</div>'
             + '<div class="multimedia">'
-            + '<video><source src=""></video>'
+            + '<video controls="controls"></video>'
             + '</div>'
             + '</div>'
 
@@ -836,12 +836,11 @@
         jumpToImage: function (imageNumber) {
             if (this.settings.is_animating == false) {
                 /**if this is an image*/
-                console.log('is not animating');
-                console.log(imageNumber);
-                if (this.box_skitter.find('.container_thumbs .image_number[rel='+imageNumber+']').attr('media-type')=='image') {
-                    console.log('is image')
+                if (this.box_skitter.find('.container_thumbs .image_number[rel=' + imageNumber + ']').attr('media-type') == 'image') {
                     /**if previous element is multimedia*/
                     /**hide video tag, show img tag, delay hide*/
+                    this.box_skitter.find('.multimedia video')[0].pause();
+                    this.box_skitter.find('.multimedia video source').remove();
                     this.box_skitter.find('.multimedia').fadeOut(500).delay(500).hide();
                     this.box_skitter.find('.image').fadeIn(500).delay(500).show();
 
@@ -861,13 +860,13 @@
                     /**if previous element is image*/
                     /**hide img tag, show video tag with fade animation*/
                     /**change source tag src of video*/
-                    console.log('is multimedia')
-                    this.box_skitter.find('.iamge').fadeOut(500).delay(500).hide();
-                    this.box_skitter.find('.multimedia').fadeIn(500).show();
-
+                    this.box_skitter.find('.iamge').hide();
+                    this.box_skitter.find('.multimedia').show();
+                    this.settings.image_i = Math.floor(imageNumber);
+                    this.setImageLink();
 
                     /** at this point, image_atual is the existing image src*/
-//                    this.box_skitter.find('.multimedia').find('video').find('source').attr('src', );
+                    this.box_skitter.find('.multimedia').find('video').html('<source src="' + this.settings.image_atual + '">');
                     /** what i have to do is to create another function assembling nextImage function
                      * (put video source into <video><source "src">)
                      * */
@@ -2738,11 +2737,13 @@
             var link_image = this.settings.media_links[this.settings.image_i][1];
             var label_image = this.settings.media_links[this.settings.image_i][3];
             var target_link = this.settings.media_links[this.settings.image_i][4];
+            var media_type = this.settings.media_links[this.settings.image_i][5];
 
             this.settings.image_atual = name_image;
             this.settings.link_atual = link_image;
             this.settings.label_atual = label_image;
             this.settings.target_atual = target_link;
+            this.settings.mediatype_atual = media_type;
         },
 
         // Add class for number
