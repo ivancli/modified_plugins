@@ -70,6 +70,8 @@
         // Actual target (internal)
         target_atual: '_self',
 
+        mediatype_atual: null,
+
         // Skitter width (internal)
         width_skitter: null,
 
@@ -245,6 +247,9 @@
             + '<a href=""><img class="image_main" /></a>'
             + '<div class="label_skitter"></div>'
             + '</div>'
+            + '<div class="multimedia">'
+            + '<video><source src=""></video>'
+            + '</div>'
             + '</div>'
 
     };
@@ -334,6 +339,10 @@
             // Structure html
             this.box_skitter.append(this.settings.structure);
 
+            /**set multimedia size*/
+            this.box_skitter.find('.multimedia video').width(this.settings.width_skitter);
+            this.box_skitter.find('.multimedia video').height(this.settings.height_skitter);
+
             // Settings
             this.settings.easing_default = this.getEasing(this.settings.easing);
 
@@ -367,14 +376,14 @@
                     }
                     if (media_type == 'image') {
                         self.box_skitter.find('.info_slide').append(
-                            '<span class="image_number' + initial_select_class + '" rel="' + (u - 1) + '" id="image_n_' + u + '_' + self.number_skitter + '">'
+                            '<span media-type="' + media_type + '" class="image_number' + initial_select_class + '" rel="' + (u - 1) + '" id="image_n_' + u + '_' + self.number_skitter + '">'
                                 + '<img src="' + src + '" ' + dimension_thumb + ' />'
                                 + '</span> '
                         );
                     }
                     else {
                         self.box_skitter.find('.info_slide').append(
-                            '<span class="image_number' + initial_select_class + '" rel="' + (u - 1) + '" id="image_n_' + u + '_' + self.number_skitter + '">'
+                            '<span media-type="' + media_type + '" class="image_number' + initial_select_class + '" rel="' + (u - 1) + '" id="image_n_' + u + '_' + self.number_skitter + '">'
                                 + '<img style="left: 0 !important; top: -25px !important;" src="images/media-thumbnail.png" ' + dimension_thumb + ' />'
                                 + '</span> '
                         );
@@ -419,6 +428,7 @@
                  * animation_type
                  * label
                  * target
+                 * mediatype
                  */
                 $.each(this.settings.json, function (i, v) {
                     ++u;
@@ -427,9 +437,9 @@
                     var animation_type = v['animation_type'];
                     var label = v['label'];
                     var target = v['target'];
-                    var mediatype = (typeof v['mediatype'] != 'undefined') ? v['mediatype'] : 'image';
+                    var media_type = (typeof v['mediatype'] != 'undefined') ? v['mediatype'] : 'image';
 
-                    addMediaLink(link, src, animation_type, label, target, mediatype);
+                    addMediaLink(link, src, animation_type, label, target, media_type);
                 });
 
             }
@@ -570,6 +580,7 @@
             this.settings.link_atual = this.settings.media_links[0][1];
             this.settings.label_atual = this.settings.media_links[0][3];
             this.settings.target_atual = this.settings.media_links[0][4];
+            this.settings.mediatype_atual = this.settings.media_links[0][5];
 
             if (this.settings.media_links.length > 1) {
                 this.box_skitter.find('.prev_button').click(function () {
@@ -714,24 +725,38 @@
             var total = this.settings.media_links.length;
 
             var u = 0;
-            $.each(this.settings.media_links, function (i) {
+            $.each(this.settings.media_links, function (i, v) {
                 var self_il = this;
                 var loading = $('<span class="image_loading"></span>');
                 loading.css({position: 'absolute', top: '-9999em'});
                 self.box_skitter.append(loading);
-                var img = new Image();
 
-                $(img).load(function () {
+
+                /**detect media type*/
+                if (v[5] == 'image') {
+                    var img = new Image();
+
+                    $(img).load(function () {
+                        ++u;
+                        if (u == total) {
+                            self.box_skitter.find('.loading').remove();
+                            self.box_skitter.find('.image_loading').remove();
+                            self.start();
+                        }
+                    }).error(function () {
+                            self.box_skitter.find('.loading, .image_loading, .image_number, .next_button, .prev_button').remove();
+                            self.box_skitter.html('<p style="color:white;background:black;">Error loading images. One or more images were not found.</p>');
+                        }).attr('src', self_il[0]);
+                }
+                else {
+                    var multi = document.createElement('video');
                     ++u;
                     if (u == total) {
                         self.box_skitter.find('.loading').remove();
                         self.box_skitter.find('.image_loading').remove();
                         self.start();
                     }
-                }).error(function () {
-                        self.box_skitter.find('.loading, .image_loading, .image_number, .next_button, .prev_button').remove();
-                        self.box_skitter.html('<p style="color:white;background:black;">Error loading images. One or more images were not found.</p>');
-                    }).attr('src', self_il[0]);
+                }
             });
         },
 
@@ -757,13 +782,23 @@
             self.windowFocusOut();
             self.setLinkAtual();
 
-            self.box_skitter.find('.image a img').attr({'src': self.settings.image_atual});
-            img_link = self.box_skitter.find('.image a');
-            img_link = self.resizeImage(img_link);
-            img_link.find('img').fadeIn(1500);
 
-            self.setValueBoxText();
-            self.showBoxText();
+            /**mediatype detection is needed here*/
+            if (this.settings.mediatype_atual = 'image') {
+                self.box_skitter.find('.image').show();
+                self.box_skitter.find('.image a img').attr({'src': self.settings.image_atual});
+                img_link = self.box_skitter.find('.image a');
+                img_link = self.resizeImage(img_link);
+                img_link.find('img').fadeIn(1500);
+                self.setValueBoxText();
+                self.showBoxText();
+            }
+            else {
+                self.box_skitter.find('.multimedia').show();
+                self.box_skitter.find('.multimedia video source').attr({'src': self.settings.image_atual});
+            }
+            /**end of detection*/
+
 
             if (self.settings.auto_play) {
                 self.stopOnMouseOver();
@@ -801,8 +836,15 @@
         jumpToImage: function (imageNumber) {
             if (this.settings.is_animating == false) {
                 /**if this is an image*/
+                console.log('is not animating');
+                console.log(imageNumber);
+                if (this.box_skitter.find('.container_thumbs .image_number[rel='+imageNumber+']').attr('media-type')=='image') {
+                    console.log('is image')
                     /**if previous element is multimedia*/
-                        /**hide video tag, show img tag, delay hide*/
+                    /**hide video tag, show img tag, delay hide*/
+                    this.box_skitter.find('.multimedia').fadeOut(500).delay(500).hide();
+                    this.box_skitter.find('.image').fadeIn(500).delay(500).show();
+
                     this.settings.elapsedTime = 0;
                     this.box_skitter.find('.box_clone').stop();
                     this.clearTimer(true);
@@ -813,10 +855,24 @@
                     this.box_skitter.find('.box_clone').remove();
 
                     this.nextImage();
-                /**else (this is a video or audio)*/
+                }
+                else {
+                    /**else (this is a video or audio)*/
                     /**if previous element is image*/
-                        /**hide img tag, show video tag with fade animation*/
+                    /**hide img tag, show video tag with fade animation*/
                     /**change source tag src of video*/
+                    console.log('is multimedia')
+                    this.box_skitter.find('.iamge').fadeOut(500).delay(500).hide();
+                    this.box_skitter.find('.multimedia').fadeIn(500).show();
+
+
+                    /** at this point, image_atual is the existing image src*/
+//                    this.box_skitter.find('.multimedia').find('video').find('source').attr('src', );
+                    /** what i have to do is to create another function assembling nextImage function
+                     * (put video source into <video><source "src">)
+                     * */
+
+                }
             }
         },
 

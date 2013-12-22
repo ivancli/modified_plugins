@@ -20,8 +20,9 @@
     border-radius: 10px;
 }
 
-.box_skitter .image {
+.box_skitter .image, .box_skitter .multimedia{
 	overflow: hidden;
+    display: none;
 }
 
 .box_skitter .image img {
