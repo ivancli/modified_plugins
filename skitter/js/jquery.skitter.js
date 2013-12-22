@@ -800,17 +800,23 @@
          */
         jumpToImage: function (imageNumber) {
             if (this.settings.is_animating == false) {
+                /**if this is an image*/
+                    /**if previous element is multimedia*/
+                        /**hide video tag, show img tag, delay hide*/
+                    this.settings.elapsedTime = 0;
+                    this.box_skitter.find('.box_clone').stop();
+                    this.clearTimer(true);
+                    this.settings.image_i = Math.floor(imageNumber);
 
-                this.settings.elapsedTime = 0;
-                this.box_skitter.find('.box_clone').stop();
-                this.clearTimer(true);
-                this.settings.image_i = Math.floor(imageNumber);
+                    this.box_skitter.find('.image a').attr({'href': this.settings.link_atual});
+                    this.box_skitter.find('.image_main').attr({'src': this.settings.image_atual});
+                    this.box_skitter.find('.box_clone').remove();
 
-                this.box_skitter.find('.image a').attr({'href': this.settings.link_atual});
-                this.box_skitter.find('.image_main').attr({'src': this.settings.image_atual});
-                this.box_skitter.find('.box_clone').remove();
-
-                this.nextImage();
+                    this.nextImage();
+                /**else (this is a video or audio)*/
+                    /**if previous element is image*/
+                        /**hide img tag, show video tag with fade animation*/
+                    /**change source tag src of video*/
             }
         },
 
