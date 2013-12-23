@@ -26,7 +26,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="153" column="79" selection-start="7727" selection-end="7727" vertical-scroll-proportion="-25.615385" vertical-offset="1935" max-vertical-offset="2890">
+            <state line="153" column="79" selection-start="7727" selection-end="7727" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="2890">
               <folding />
             </state>
           </provider>
@@ -35,7 +35,7 @@
       <file leaf-file-name="image_slider.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/image_slider.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="51" selection-start="1832" selection-end="1837" vertical-scroll-proportion="-25.615385" vertical-offset="337" max-vertical-offset="1462">
+            <state line="59" column="51" selection-start="1832" selection-end="1837" vertical-scroll-proportion="0.0" vertical-offset="1003" max-vertical-offset="1462">
               <folding />
             </state>
           </provider>
@@ -44,11 +44,11 @@
       <file leaf-file-name="jquery.skitter.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/jquery.skitter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="858" column="56" selection-start="32541" selection-end="32541" vertical-scroll-proportion="0.6258919" vertical-offset="13972" max-vertical-offset="62271">
+            <state line="712" column="0" selection-start="26412" selection-end="26412" vertical-scroll-proportion="0.67045456" vertical-offset="11455" max-vertical-offset="62322">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1387719304176" expanded="true" signature="11782:11824" placeholder="..." />
-                <marker date="1387719304176" expanded="true" signature="27936:27965" placeholder="..." />
+                <marker date="1387806850401" expanded="false" signature="11550:11592" placeholder="..." />
+                <marker date="1387806850401" expanded="false" signature="27703:27732" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -57,7 +57,7 @@
       <file leaf-file-name="skitter.styles.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/skitter.styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="24" selection-start="358" selection-end="358" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13991">
+            <state line="19" column="24" selection-start="358" selection-end="358" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="13991">
               <folding />
             </state>
           </provider>
@@ -182,6 +182,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FullScreen" value="true" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
   </component>
   <component name="RecentsManager">
@@ -273,8 +274,8 @@
         <state line="301" column="77" selection-start="7011" selection-end="7011" vertical-scroll-proportion="0.0" vertical-offset="4544" max-vertical-offset="59976">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1387719304176" expanded="true" signature="11782:11824" placeholder="..." />
-            <marker date="1387719304176" expanded="true" signature="27936:27965" placeholder="..." />
+            <marker date="1387806850401" expanded="false" signature="11550:11592" placeholder="..." />
+            <marker date="1387806850401" expanded="false" signature="27703:27732" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -319,8 +320,8 @@
         <state line="2630" column="17" selection-start="81363" selection-end="81363" vertical-scroll-proportion="0.0" vertical-offset="44171" max-vertical-offset="58786">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1387719304176" expanded="true" signature="11782:11824" placeholder="..." />
-            <marker date="1387719304176" expanded="true" signature="27936:27965" placeholder="..." />
+            <marker date="1387806850401" expanded="false" signature="11550:11592" placeholder="..." />
+            <marker date="1387806850401" expanded="false" signature="27703:27732" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -353,25 +354,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/image_slider.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="51" selection-start="1832" selection-end="1837" vertical-scroll-proportion="-25.615385" vertical-offset="337" max-vertical-offset="1462">
+        <state line="59" column="51" selection-start="1832" selection-end="1837" vertical-scroll-proportion="0.0" vertical-offset="1003" max-vertical-offset="1462">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="153" column="79" selection-start="7727" selection-end="7727" vertical-scroll-proportion="-25.615385" vertical-offset="1935" max-vertical-offset="2890">
+        <state line="153" column="79" selection-start="7727" selection-end="7727" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="2890">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/jquery.skitter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="858" column="56" selection-start="32541" selection-end="32541" vertical-scroll-proportion="0.6258919" vertical-offset="13972" max-vertical-offset="62271">
+        <state line="712" column="0" selection-start="26412" selection-end="26412" vertical-scroll-proportion="0.67045456" vertical-offset="11455" max-vertical-offset="62322">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1387719304176" expanded="true" signature="11782:11824" placeholder="..." />
-            <marker date="1387719304176" expanded="true" signature="27936:27965" placeholder="..." />
+            <marker date="1387806850401" expanded="false" signature="11550:11592" placeholder="..." />
+            <marker date="1387806850401" expanded="false" signature="27703:27732" placeholder="..." />
           </folding>
         </state>
       </provider>

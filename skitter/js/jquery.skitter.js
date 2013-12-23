@@ -248,7 +248,6 @@
             + '<div class="label_skitter"></div>'
             + '</div>'
             + '<div class="multimedia">'
-            + '<video controls="controls"></video>'
             + '</div>'
             + '</div>'
 
@@ -340,10 +339,8 @@
             this.box_skitter.append(this.settings.structure);
 
             /**set multimedia size*/
-            this.box_skitter.find('.multimedia video').width(this.settings.width_skitter);
-            this.box_skitter.find('.multimedia video').height(this.settings.height_skitter);
 
-            // Settings
+                // Settings
             this.settings.easing_default = this.getEasing(this.settings.easing);
 
             if (this.settings.velocity >= 2) this.settings.velocity = 1.3;
@@ -713,7 +710,6 @@
             if ($.isFunction(this.settings.beforeLoad)) this.settings.beforeLoad();
         },
 
-
         /**
          * Load images
          */
@@ -785,6 +781,7 @@
 
             /**mediatype detection is needed here*/
             if (this.settings.mediatype_atual = 'image') {
+                self.box_skitter.find('.multimedia').show();
                 self.box_skitter.find('.image').show();
                 self.box_skitter.find('.image a img').attr({'src': self.settings.image_atual});
                 img_link = self.box_skitter.find('.image a');
@@ -794,8 +791,10 @@
                 self.showBoxText();
             }
             else {
+                /**basic loading first element*/
+                self.box_skitter.find('.image').hide();
                 self.box_skitter.find('.multimedia').show();
-                self.box_skitter.find('.multimedia video source').attr({'src': self.settings.image_atual});
+                this.box_skitter.find('.multimedia').html('<video controls="controls" height="' + this.settings.height_skitter + '" width="' + this.settings.width_skitter + '"><source src="' + this.settings.image_atual + '"></video>');
             }
             /**end of detection*/
 
@@ -839,10 +838,10 @@
                 if (this.box_skitter.find('.container_thumbs .image_number[rel=' + imageNumber + ']').attr('media-type') == 'image') {
                     /**if previous element is multimedia*/
                     /**hide video tag, show img tag, delay hide*/
-                    this.box_skitter.find('.multimedia video')[0].pause();
-                    this.box_skitter.find('.multimedia video source').remove();
-                    this.box_skitter.find('.multimedia').fadeOut(500).delay(500).hide();
-                    this.box_skitter.find('.image').fadeIn(500).delay(500).show();
+//                    this.box_skitter.find('.multimedia video')[0].pause();
+                    this.box_skitter.find('.multimedia video').remove();
+                    this.box_skitter.find('.multimedia').fadeOut(1000).hide();
+                    this.box_skitter.find('.image').fadeIn(500).show();
 
                     this.settings.elapsedTime = 0;
                     this.box_skitter.find('.box_clone').stop();
@@ -856,17 +855,21 @@
                     this.nextImage();
                 }
                 else {
+                    /**should remove previous animation boxes*/
+
                     /**else (this is a video or audio)*/
                     /**if previous element is image*/
                     /**hide img tag, show video tag with fade animation*/
                     /**change source tag src of video*/
-                    this.box_skitter.find('.iamge').hide();
-                    this.box_skitter.find('.multimedia').show();
+                    this.box_skitter.find('.box_clone').fadeOut(1000).remove();
+                    this.box_skitter.find('.image').hide();
+                    this.box_skitter.find('.multimedia').fadeIn(500).show();
+                    this.clearTimer(true);
                     this.settings.image_i = Math.floor(imageNumber);
-                    this.setImageLink();
+                    this.setActualLevel();
 
                     /** at this point, image_atual is the existing image src*/
-                    this.box_skitter.find('.multimedia').find('video').html('<source src="' + this.settings.image_atual + '">');
+                    this.box_skitter.find('.multimedia').html('<video controls="controls" height="' + this.settings.height_skitter + '" width="' + this.settings.width_skitter + '"><source src="' + this.settings.image_atual + '"></video>');
                     /** what i have to do is to create another function assembling nextImage function
                      * (put video source into <video><source "src">)
                      * */
