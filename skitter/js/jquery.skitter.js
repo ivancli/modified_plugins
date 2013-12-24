@@ -12,6 +12,16 @@
  * @modifiedby Ivan Li
  */
 ;
+(function($){
+    $.event.special.destroyed = {
+        remove: function(o) {
+            if (o.handler) {
+                o.handler()
+            }
+        }
+    }
+})(jQuery);
+
 (function ($) {
 
     var number_skitter = 0,
@@ -745,7 +755,6 @@
                         }).attr('src', self_il[0]);
                 }
                 else {
-                    var multi = document.createElement('video');
                     ++u;
                     if (u == total) {
                         self.box_skitter.find('.loading').remove();
@@ -818,6 +827,7 @@
             if (self.settings.media_links.length > 1 && !init_pause) {
                 if (self.settings.auto_play) {
                     self.timer = setTimeout(function () {
+                        console.log('it\'s here');
                         self.nextImage();
                     }, self.settings.interval);
                 }
@@ -833,6 +843,8 @@
          * Jump to image
          */
         jumpToImage: function (imageNumber) {
+
+            var self = this;
             if (this.settings.is_animating == false) {
                 /**if this is an image*/
                 if (this.box_skitter.find('.container_thumbs .image_number[rel=' + imageNumber + ']').attr('media-type') == 'image') {
@@ -873,7 +885,16 @@
                     /** what i have to do is to create another function assembling nextImage function
                      * (put video source into <video><source "src">)
                      * */
-
+                    this.box_skitter.find('.multimedia video').on("play", function () {
+                        self.pauseTime();
+                        self.settings.is_paused = true;
+                        self.clearTimer(true);
+                    });
+                    this.box_skitter.find('.multimedia video').on("destroyed", function () {
+                        /**
+                         * resume timer here
+                         */
+                    });
                 }
             }
         },
@@ -883,186 +904,227 @@
          */
         nextImage: function () {
             var self = this;
-            animations_functions = [
-                'cube',
-                'cubeRandom',
-                'block',
-                'cubeStop',
-                'cubeStopRandom',
-                'cubeHide',
-                'cubeSize',
-                'horizontal',
-                'showBars',
-                'showBarsRandom',
-                'tube',
-                'fade',
-                'fadeFour',
-                'paralell',
-                'blind',
-                'blindHeight',
-                'blindWidth',
-                'directionTop',
-                'directionBottom',
-                'directionRight',
-                'directionLeft',
-                'cubeSpread',
-                'glassCube',
-                'glassBlock',
-                'circles',
-                'circlesInside',
-                'circlesRotate',
-                'cubeShow',
-                'upBars',
-                'downBars',
-                'hideBars',
-                'swapBars',
-                'swapBarsBack',
-                'swapBlocks',
-                'cut'
-            ];
 
-            if (self.settings.progressbar) self.hideProgressBar();
+            if (this.box_skitter.find('.container_thumbs .image_number[rel=' + self.settings.image_i + ']').attr('media-type') == 'image') {
+                /**if previous element is multimedia*/
+                /**hide video tag, show img tag, delay hide*/
 
-            animation_type = (this.settings.animation == '' && this.settings.media_links[this.settings.image_i][2]) ?
-                this.settings.media_links[this.settings.image_i][2] : (this.settings.animation == '' ? 'default' : this.settings.animation);
+                this.box_skitter.find('.multimedia video').remove();
+                this.box_skitter.find('.multimedia').fadeOut(1000).hide();
+                this.box_skitter.find('.image').fadeIn(500).show();
 
-            // RandomUnique
-            if (animation_type == 'randomSmart') {
-                if (!this.settings.random_ia) {
-                    animations_functions.sort(function () {
-                        return 0.5 - Math.random();
-                    });
-                    this.settings.random_ia = animations_functions;
+
+                animations_functions = [
+                    'cube',
+                    'cubeRandom',
+                    'block',
+                    'cubeStop',
+                    'cubeStopRandom',
+                    'cubeHide',
+                    'cubeSize',
+                    'horizontal',
+                    'showBars',
+                    'showBarsRandom',
+                    'tube',
+                    'fade',
+                    'fadeFour',
+                    'paralell',
+                    'blind',
+                    'blindHeight',
+                    'blindWidth',
+                    'directionTop',
+                    'directionBottom',
+                    'directionRight',
+                    'directionLeft',
+                    'cubeSpread',
+                    'glassCube',
+                    'glassBlock',
+//                'circles',
+//                'circlesInside',
+//                'circlesRotate',
+                    'cubeShow',
+                    'upBars',
+                    'downBars',
+                    'hideBars',
+                    'swapBars',
+                    'swapBarsBack',
+                    'swapBlocks',
+                    'cut'
+                ];
+
+                if (self.settings.progressbar) self.hideProgressBar();
+
+                animation_type = (this.settings.animation == '' && this.settings.media_links[this.settings.image_i][2]) ?
+                    this.settings.media_links[this.settings.image_i][2] : (this.settings.animation == '' ? 'default' : this.settings.animation);
+
+                // RandomUnique
+                if (animation_type == 'randomSmart') {
+                    if (!this.settings.random_ia) {
+                        animations_functions.sort(function () {
+                            return 0.5 - Math.random();
+                        });
+                        this.settings.random_ia = animations_functions;
+                    }
+                    animation_type = this.settings.random_ia[this.settings.image_i];
                 }
-                animation_type = this.settings.random_ia[this.settings.image_i];
-            }
-            // Random
-            else if (animation_type == 'random') {
-                var random_id = parseInt(Math.random() * animations_functions.length);
-                animation_type = animations_functions[random_id];
-            }
-            // Specific animations
-            else if (self.settings.with_animations.length > 0) {
-                var total_with_animations = self.settings.with_animations.length;
-                if (this.settings._i_animation == undefined) {
-                    this.settings._i_animation = 0;
+                // Random
+                else if (animation_type == 'random') {
+                    var random_id = parseInt(Math.random() * animations_functions.length);
+                    animation_type = animations_functions[random_id];
                 }
-                animation_type = self.settings.with_animations[this.settings._i_animation];
-                ++this.settings._i_animation;
-                if (this.settings._i_animation >= total_with_animations) this.settings._i_animation = 0;
+                // Specific animations
+                else if (self.settings.with_animations.length > 0) {
+                    var total_with_animations = self.settings.with_animations.length;
+                    if (this.settings._i_animation == undefined) {
+                        this.settings._i_animation = 0;
+                    }
+                    animation_type = self.settings.with_animations[this.settings._i_animation];
+                    ++this.settings._i_animation;
+                    if (this.settings._i_animation >= total_with_animations) this.settings._i_animation = 0;
+                }
+                switch (animation_type) {
+                    case 'cube' :
+                        this.animationCube();
+                        break;
+                    case 'cubeRandom' :
+                        this.animationCube({random: true});
+                        break;
+                    case 'block' :
+                        this.animationBlock();
+                        break;
+                    case 'cubeStop' :
+                        this.animationCubeStop();
+                        break;
+                    case 'cubeStopRandom' :
+                        this.animationCubeStop({random: true});
+                        break;
+                    case 'cubeHide' :
+                        this.animationCubeHide();
+                        break;
+                    case 'cubeSize' :
+                        this.animationCubeSize();
+                        break;
+                    case 'horizontal' :
+                        this.animationHorizontal();
+                        break;
+                    case 'showBars' :
+                        this.animationShowBars();
+                        break;
+                    case 'showBarsRandom' :
+                        this.animationShowBars({random: true});
+                        break;
+                    case 'tube' :
+                        this.animationTube();
+                        break;
+                    case 'fade' :
+                        this.animationFade();
+                        break;
+                    case 'fadeFour' :
+                        this.animationFadeFour();
+                        break;
+                    case 'paralell' :
+                        this.animationParalell();
+                        break;
+                    case 'blind' :
+                        this.animationBlind();
+                        break;
+                    case 'blindHeight' :
+                        this.animationBlindDimension({height: true});
+                        break;
+                    case 'blindWidth' :
+                        this.animationBlindDimension({height: false, time_animate: 400, delay: 50});
+                        break;
+                    case 'directionTop' :
+                        this.animationDirection({direction: 'top'});
+                        break;
+                    case 'directionBottom' :
+                        this.animationDirection({direction: 'bottom'});
+                        break;
+                    case 'directionRight' :
+                        this.animationDirection({direction: 'right', total: 5});
+                        break;
+                    case 'directionLeft' :
+                        this.animationDirection({direction: 'left', total: 5});
+                        break;
+                    case 'cubeSpread' :
+                        this.animationCubeSpread();
+                        break;
+                    case 'cubeJelly' :
+                        this.animationCubeJelly();
+                        break;
+                    case 'glassCube' :
+                        this.animationGlassCube();
+                        break;
+                    case 'glassBlock' :
+                        this.animationGlassBlock();
+                        break;
+                    case 'circles' :
+                        this.animationCircles();
+                        break;
+                    case 'circlesInside' :
+                        this.animationCirclesInside();
+                        break;
+                    case 'circlesRotate' :
+                        this.animationCirclesRotate();
+                        break;
+                    case 'cubeShow' :
+                        this.animationCubeShow();
+                        break;
+                    case 'upBars' :
+                        this.animationDirectionBars({direction: 'top'});
+                        break;
+                    case 'downBars' :
+                        this.animationDirectionBars({direction: 'bottom'});
+                        break;
+                    case 'hideBars' :
+                        this.animationHideBars();
+                        break;
+                    case 'swapBars' :
+                        this.animationSwapBars();
+                        break;
+                    case 'swapBarsBack' :
+                        this.animationSwapBars({easing: 'easeOutBack'});
+                        break;
+                    case 'swapBlocks' :
+                        this.animationSwapBlocks();
+                        break;
+                    case 'cut' :
+                        this.animationCut();
+                        break;
+                    default :
+                        this.animationTube();
+                        break;
+                }
             }
-            switch (animation_type) {
-                case 'cube' :
-                    this.animationCube();
-                    break;
-                case 'cubeRandom' :
-                    this.animationCube({random: true});
-                    break;
-                case 'block' :
-                    this.animationBlock();
-                    break;
-                case 'cubeStop' :
-                    this.animationCubeStop();
-                    break;
-                case 'cubeStopRandom' :
-                    this.animationCubeStop({random: true});
-                    break;
-                case 'cubeHide' :
-                    this.animationCubeHide();
-                    break;
-                case 'cubeSize' :
-                    this.animationCubeSize();
-                    break;
-                case 'horizontal' :
-                    this.animationHorizontal();
-                    break;
-                case 'showBars' :
-                    this.animationShowBars();
-                    break;
-                case 'showBarsRandom' :
-                    this.animationShowBars({random: true});
-                    break;
-                case 'tube' :
-                    this.animationTube();
-                    break;
-                case 'fade' :
-                    this.animationFade();
-                    break;
-                case 'fadeFour' :
-                    this.animationFadeFour();
-                    break;
-                case 'paralell' :
-                    this.animationParalell();
-                    break;
-                case 'blind' :
-                    this.animationBlind();
-                    break;
-                case 'blindHeight' :
-                    this.animationBlindDimension({height: true});
-                    break;
-                case 'blindWidth' :
-                    this.animationBlindDimension({height: false, time_animate: 400, delay: 50});
-                    break;
-                case 'directionTop' :
-                    this.animationDirection({direction: 'top'});
-                    break;
-                case 'directionBottom' :
-                    this.animationDirection({direction: 'bottom'});
-                    break;
-                case 'directionRight' :
-                    this.animationDirection({direction: 'right', total: 5});
-                    break;
-                case 'directionLeft' :
-                    this.animationDirection({direction: 'left', total: 5});
-                    break;
-                case 'cubeSpread' :
-                    this.animationCubeSpread();
-                    break;
-                case 'cubeJelly' :
-                    this.animationCubeJelly();
-                    break;
-                case 'glassCube' :
-                    this.animationGlassCube();
-                    break;
-                case 'glassBlock' :
-                    this.animationGlassBlock();
-                    break;
-                case 'circles' :
-                    this.animationCircles();
-                    break;
-                case 'circlesInside' :
-                    this.animationCirclesInside();
-                    break;
-                case 'circlesRotate' :
-                    this.animationCirclesRotate();
-                    break;
-                case 'cubeShow' :
-                    this.animationCubeShow();
-                    break;
-                case 'upBars' :
-                    this.animationDirectionBars({direction: 'top'});
-                    break;
-                case 'downBars' :
-                    this.animationDirectionBars({direction: 'bottom'});
-                    break;
-                case 'hideBars' :
-                    this.animationHideBars();
-                    break;
-                case 'swapBars' :
-                    this.animationSwapBars();
-                    break;
-                case 'swapBarsBack' :
-                    this.animationSwapBars({easing: 'easeOutBack'});
-                    break;
-                case 'swapBlocks' :
-                    this.animationSwapBlocks();
-                    break;
-                case 'cut' :
-                    this.animationCut();
-                    break;
-                default :
-                    this.animationTube();
-                    break;
+            else {
+
+                /**should remove previous animation boxes*/
+
+                /**else (this is a video or audio)*/
+                /**if previous element is image*/
+                /**hide img tag, show video tag with fade animation*/
+                /**change source tag src of video*/
+                this.box_skitter.find('.box_clone').fadeOut(1000).remove();
+                this.box_skitter.find('.image').hide();
+                this.box_skitter.find('.multimedia').fadeIn(1000).show();
+                this.clearTimer(true);
+                this.setActualLevel();
+                /** at this point, image_atual is the existing image src*/
+                this.box_skitter.find('.multimedia').html('<video controls="controls" height="' + this.settings.height_skitter + '" width="' + this.settings.width_skitter + '"><source src="' + this.settings.image_atual + '"></video>');
+                /** what i have to do is to create another function assembling nextImage function
+                 * (put video source into <video><source "src">)
+                 * */
+                this.finishAnimation();
+                this.box_skitter.find('.multimedia video').on("play", function () {
+                    self.pauseTime();
+                    self.settings.is_paused = true;
+                    self.clearTimer(true);
+                });
+                this.box_skitter.find('.multimedia video').on("destroyed", function () {
+                    /**
+                     * resume timer here
+                     */
+                });
             }
         },
 

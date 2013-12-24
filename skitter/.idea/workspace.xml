@@ -26,7 +26,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="153" column="79" selection-start="7727" selection-end="7727" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="2890">
+            <state line="153" column="79" selection-start="7727" selection-end="7727" vertical-scroll-proportion="-25.615385" vertical-offset="1935" max-vertical-offset="2890">
               <folding />
             </state>
           </provider>
@@ -44,11 +44,11 @@
       <file leaf-file-name="jquery.skitter.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/jquery.skitter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="712" column="0" selection-start="26412" selection-end="26412" vertical-scroll-proportion="0.67045456" vertical-offset="11455" max-vertical-offset="62322">
+            <state line="1122" column="0" selection-start="44064" selection-end="44064" vertical-scroll-proportion="0.5938494" vertical-offset="18514" max-vertical-offset="63376">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1387806850401" expanded="false" signature="11550:11592" placeholder="..." />
-                <marker date="1387806850401" expanded="false" signature="27703:27732" placeholder="..." />
+                <marker date="1387856863954" expanded="true" signature="11728:11770" placeholder="..." />
+                <marker date="1387856863954" expanded="true" signature="27881:27910" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -255,13 +255,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="32" selection-start="1953" selection-end="1953" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="2431">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/image_slider.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="44" column="56" selection-start="1169" selection-end="1169" vertical-scroll-proportion="0.0" vertical-offset="141" max-vertical-offset="1071">
@@ -274,8 +267,8 @@
         <state line="301" column="77" selection-start="7011" selection-end="7011" vertical-scroll-proportion="0.0" vertical-offset="4544" max-vertical-offset="59976">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1387806850401" expanded="false" signature="11550:11592" placeholder="..." />
-            <marker date="1387806850401" expanded="false" signature="27703:27732" placeholder="..." />
+            <marker date="1387856863954" expanded="true" signature="11728:11770" placeholder="..." />
+            <marker date="1387856863954" expanded="true" signature="27881:27910" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -320,8 +313,8 @@
         <state line="2630" column="17" selection-start="81363" selection-end="81363" vertical-scroll-proportion="0.0" vertical-offset="44171" max-vertical-offset="58786">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1387806850401" expanded="false" signature="11550:11592" placeholder="..." />
-            <marker date="1387806850401" expanded="false" signature="27703:27732" placeholder="..." />
+            <marker date="1387856863954" expanded="true" signature="11728:11770" placeholder="..." />
+            <marker date="1387856863954" expanded="true" signature="27881:27910" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -361,18 +354,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="153" column="79" selection-start="7727" selection-end="7727" vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="2890">
+        <state line="153" column="79" selection-start="7727" selection-end="7727" vertical-scroll-proportion="-25.615385" vertical-offset="1935" max-vertical-offset="2890">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/DHTML.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1022" column="0" selection-start="16008" selection-end="16008" vertical-scroll-proportion="17.710499" vertical-offset="0" max-vertical-offset="64651">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/jquery.skitter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="712" column="0" selection-start="26412" selection-end="26412" vertical-scroll-proportion="0.67045456" vertical-offset="11455" max-vertical-offset="62322">
+        <state line="1122" column="0" selection-start="44064" selection-end="44064" vertical-scroll-proportion="0.5938494" vertical-offset="18514" max-vertical-offset="63376">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1387806850401" expanded="false" signature="11550:11592" placeholder="..." />
-            <marker date="1387806850401" expanded="false" signature="27703:27732" placeholder="..." />
+            <marker date="1387856863954" expanded="true" signature="11728:11770" placeholder="..." />
+            <marker date="1387856863954" expanded="true" signature="27881:27910" placeholder="..." />
           </folding>
         </state>
       </provider>
