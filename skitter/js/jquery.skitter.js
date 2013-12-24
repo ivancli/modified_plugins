@@ -827,7 +827,6 @@
             if (self.settings.media_links.length > 1 && !init_pause) {
                 if (self.settings.auto_play) {
                     self.timer = setTimeout(function () {
-                        console.log('it\'s here');
                         self.nextImage();
                     }, self.settings.interval);
                 }

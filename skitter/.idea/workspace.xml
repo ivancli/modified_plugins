@@ -32,23 +32,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="image_slider.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="image_slider.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/image_slider.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="51" selection-start="1832" selection-end="1837" vertical-scroll-proportion="0.0" vertical-offset="1003" max-vertical-offset="1462">
+            <state line="61" column="97" selection-start="1907" selection-end="1907" vertical-scroll-proportion="0.5612903" vertical-offset="515" max-vertical-offset="1445">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jquery.skitter.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="jquery.skitter.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/jquery.skitter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1126" column="20" selection-start="44315" selection-end="44315" vertical-scroll-proportion="0.44938016" vertical-offset="18707" max-vertical-offset="63478">
+            <state line="829" column="0" selection-start="30944" selection-end="30944" vertical-scroll-proportion="-12.56" vertical-offset="13779" max-vertical-offset="63461">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <marker date="1387857475430" expanded="false" signature="11728:11770" placeholder="..." />
-                <marker date="1387857475430" expanded="false" signature="27881:27910" placeholder="..." />
+                <marker date="1387857642186" expanded="false" signature="11728:11770" placeholder="..." />
+                <marker date="1387857642186" expanded="false" signature="27881:27910" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -76,10 +76,10 @@
         <option value="$PROJECT_DIR$/css/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/external/bootstrap3.min.js" />
         <option value="$PROJECT_DIR$/js/jquery.min.js" />
-        <option value="$PROJECT_DIR$/image_slider.html" />
         <option value="$PROJECT_DIR$/css/skitter.styles.css" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/jquery.skitter.js" />
+        <option value="$PROJECT_DIR$/image_slider.html" />
       </list>
     </option>
   </component>
@@ -267,8 +267,8 @@
         <state line="301" column="77" selection-start="7011" selection-end="7011" vertical-scroll-proportion="0.0" vertical-offset="4544" max-vertical-offset="59976">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1387857475430" expanded="false" signature="11728:11770" placeholder="..." />
-            <marker date="1387857475430" expanded="false" signature="27881:27910" placeholder="..." />
+            <marker date="1387857642186" expanded="false" signature="11728:11770" placeholder="..." />
+            <marker date="1387857642186" expanded="false" signature="27881:27910" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -313,8 +313,8 @@
         <state line="2630" column="17" selection-start="81363" selection-end="81363" vertical-scroll-proportion="0.0" vertical-offset="44171" max-vertical-offset="58786">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1387857475430" expanded="false" signature="11728:11770" placeholder="..." />
-            <marker date="1387857475430" expanded="false" signature="27881:27910" placeholder="..." />
+            <marker date="1387857642186" expanded="false" signature="11728:11770" placeholder="..." />
+            <marker date="1387857642186" expanded="false" signature="27881:27910" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -345,13 +345,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/image_slider.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="51" selection-start="1832" selection-end="1837" vertical-scroll-proportion="0.0" vertical-offset="1003" max-vertical-offset="1462">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="162" column="79" selection-start="8213" selection-end="8213" vertical-scroll-proportion="0.0" vertical-offset="2088" max-vertical-offset="3043">
@@ -366,12 +359,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/jquery.skitter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1126" column="20" selection-start="44315" selection-end="44315" vertical-scroll-proportion="0.44938016" vertical-offset="18707" max-vertical-offset="63478">
+        <state line="829" column="0" selection-start="30944" selection-end="30944" vertical-scroll-proportion="-12.56" vertical-offset="13779" max-vertical-offset="63461">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <marker date="1387857475430" expanded="false" signature="11728:11770" placeholder="..." />
-            <marker date="1387857475430" expanded="false" signature="27881:27910" placeholder="..." />
+            <marker date="1387857642186" expanded="false" signature="11728:11770" placeholder="..." />
+            <marker date="1387857642186" expanded="false" signature="27881:27910" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image_slider.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="97" selection-start="1907" selection-end="1907" vertical-scroll-proportion="0.5612903" vertical-offset="515" max-vertical-offset="1445">
+          <folding />
         </state>
       </provider>
     </entry>
