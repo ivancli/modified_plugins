@@ -891,6 +891,9 @@
                         self.clearTimer(true);
                     });
                     this.box_skitter.find('.multimedia video').on("destroyed", function () {
+                        self.settings.is_paused = false;
+                        self.resumeTime();
+                        self.startTime();
                         /**
                          * resume timer here
                          */
@@ -1121,6 +1124,9 @@
                     self.clearTimer(true);
                 });
                 this.box_skitter.find('.multimedia video').on("destroyed", function () {
+                    self.settings.is_paused = false;
+                    self.resumeTime();
+                    self.startTime();
                     /**
                      * resume timer here
                      */
